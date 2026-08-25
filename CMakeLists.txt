@@ -17,7 +17,7 @@ endif()
 # ---------------------------------------------------------------------------
 find_package(OpenCV REQUIRED)
 
-# Use pkg-config for Tesseract and Leptonica (fixes Ubuntu/Linux issues)
+# Use pkg-config for Tesseract and Leptonica
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(Tesseract REQUIRED tesseract)
 pkg_check_modules(Leptonica REQUIRED lept)
@@ -26,11 +26,8 @@ find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(Threads REQUIRED)
 
-# nlohmann/json (header-only)
-add_subdirectory(third_party/json)
-
 # ---------------------------------------------------------------------------
-# Dear ImGui (compiled as a static lib, backend chosen per-OS)
+# Dear ImGui (compiled as a static lib)
 # ---------------------------------------------------------------------------
 set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/third_party/imgui)
 
@@ -80,6 +77,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_SOURCE_DIR}/include/memory
     ${CMAKE_SOURCE_DIR}/include/action
     ${CMAKE_SOURCE_DIR}/include/platform
+    ${CMAKE_SOURCE_DIR}/third_party/json
     ${OpenCV_INCLUDE_DIRS}
     ${Tesseract_INCLUDE_DIRS}
     ${Leptonica_INCLUDE_DIRS}
@@ -90,7 +88,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     ${OpenCV_LIBS}
     ${Tesseract_LIBRARIES}
     ${Leptonica_LIBRARIES}
-    nlohmann_json::nlohmann_json
     Threads::Threads
 )
 
@@ -109,14 +106,14 @@ elseif(UNIX AND NOT APPLE)
     find_package(X11 REQUIRED)
     target_link_libraries(${PROJECT_NAME} PRIVATE
         ${X11_LIBRARIES}
-        Xtst          # For synthetic input events
+        Xtst
         dl
     )
     target_compile_definitions(${PROJECT_NAME} PRIVATE PLATFORM_LINUX)
 endif()
 
 # ---------------------------------------------------------------------------
-# Compiler hardening / optimization flags
+# Compiler optimization flags
 # ---------------------------------------------------------------------------
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /W4 /O2)
@@ -135,4 +132,5 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
         ${CMAKE_SOURCE_DIR}/assets
         $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
     COMMENT "Copying data/ and assets/ next to the built executable"
-)
+)git add .
+git add .
