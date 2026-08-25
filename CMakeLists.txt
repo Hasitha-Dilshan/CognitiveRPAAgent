@@ -132,5 +132,4 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
         ${CMAKE_SOURCE_DIR}/assets
         $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
     COMMENT "Copying data/ and assets/ next to the built executable"
-)git add .
-git add .
+)
