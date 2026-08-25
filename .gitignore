@@ -1,1 +1,23 @@
+# Build directories
 build/
+bin/
+out/
+.cmake/
+CMakeCache.txt
+CMakeFiles/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Executables and Zips
+*.exe
+*.zip
+Linux_Agent.zip
+
+# Large data files (Tesseract model)
+data/tessdata/*.traineddata
+
+# VS Code / IDE
+.vscode/
+.idea/

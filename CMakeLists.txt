@@ -34,7 +34,7 @@ FetchContent_MakeAvailable(imgui nlohmann_json)
 # ---------------------------------------------------------------------------
 # Dependencies
 # ---------------------------------------------------------------------------
-find_package(OpenCV REQUIRED)
+find_package(OpenCV REQUIRED COMPONENTS core highgui imgproc calib3d features2d)
 
 # Use find_package in CONFIG mode for Tesseract/Leptonica on Windows,
 # otherwise fall back to PkgConfig.
