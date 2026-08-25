@@ -1,0 +1,6 @@
+{
+    "skills": [
+        {"name": "SaveButton", "template_image_path": "assets/templates/save_icon.png", "fallback_text": "Save", "match_confidence": 0.85, "success_count": 0, "failure_count": 0, "last_updated_epoch_ms": 0},
+        {"name": "CloseButton", "template_image_path": "assets/templates/close_icon.png", "fallback_text": "Close", "match_confidence": 0.85, "success_count": 0, "failure_count": 0, "last_updated_epoch_ms": 0}
+    ]
+}
