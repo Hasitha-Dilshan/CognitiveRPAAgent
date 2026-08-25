@@ -3,7 +3,7 @@ name: Build Windows EXE
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch: # මෙය මඟින් ඔබට අවශ්‍ය වෙලාවට බොත්තමක් ඔබා Build එක Start කළ හැක
+  workflow_dispatch:
 
 jobs:
   build-windows:
@@ -29,6 +29,7 @@ jobs:
           mingw-w64-ucrt-x86_64-opencv
           mingw-w64-ucrt-x86_64-tesseract-ocr
           mingw-w64-ucrt-x86_64-glfw
+          mingw-w64-ucrt-x86_64-nlohmann-json
     
     - name: Build with CMake
       run: |
