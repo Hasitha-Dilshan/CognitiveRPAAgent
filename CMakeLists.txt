@@ -16,7 +16,15 @@ endif()
 # Dependencies
 # ---------------------------------------------------------------------------
 find_package(OpenCV REQUIRED)
-find_package(Tesseract REQUIRED)
+
+# Use pkg-config for Tesseract and Leptonica (fixes Ubuntu/Linux issues)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(Tesseract REQUIRED tesseract)
+pkg_check_modules(Leptonica REQUIRED lept)
+
+find_package(glfw3 REQUIRED)
+find_package(OpenGL REQUIRED)
+find_package(Threads REQUIRED)
 
 # nlohmann/json (header-only)
 add_subdirectory(third_party/json)
@@ -41,8 +49,7 @@ target_include_directories(imgui PUBLIC
     ${IMGUI_DIR}/backends
 )
 
-find_package(glfw3 REQUIRED)
-target_link_libraries(imgui PUBLIC glfw)
+target_link_libraries(imgui PUBLIC glfw OpenGL::GL)
 
 # ---------------------------------------------------------------------------
 # Core project sources
@@ -52,7 +59,6 @@ file(GLOB_RECURSE CORE_SOURCES
     ${CMAKE_SOURCE_DIR}/src/perception/*.cpp
     ${CMAKE_SOURCE_DIR}/src/memory/*.cpp
     ${CMAKE_SOURCE_DIR}/src/action/*.cpp
-    ${CMAKE_SOURCE_DIR}/src/ui/*.cpp
 )
 
 # Platform-specific source selection
@@ -74,16 +80,18 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_SOURCE_DIR}/include/memory
     ${CMAKE_SOURCE_DIR}/include/action
     ${CMAKE_SOURCE_DIR}/include/platform
-    ${CMAKE_SOURCE_DIR}/include/ui
     ${OpenCV_INCLUDE_DIRS}
     ${Tesseract_INCLUDE_DIRS}
+    ${Leptonica_INCLUDE_DIRS}
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     imgui
     ${OpenCV_LIBS}
-    Tesseract::libtesseract
+    ${Tesseract_LIBRARIES}
+    ${Leptonica_LIBRARIES}
     nlohmann_json::nlohmann_json
+    Threads::Threads
 )
 
 # ---------------------------------------------------------------------------
@@ -101,10 +109,8 @@ elseif(UNIX AND NOT APPLE)
     find_package(X11 REQUIRED)
     target_link_libraries(${PROJECT_NAME} PRIVATE
         ${X11_LIBRARIES}
-        Xtst          # For synthetic input events (XTestFakeMotionEvent etc.)
-        GL
+        Xtst          # For synthetic input events
         dl
-        pthread
     )
     target_compile_definitions(${PROJECT_NAME} PRIVATE PLATFORM_LINUX)
 endif()
@@ -115,5 +121,18 @@ endif()
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /W4 /O2)
 else()
-    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -O3 -pthread)
+    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -O3)
 endif()
+
+# ---------------------------------------------------------------------------
+# Post-build: copy runtime assets next to the executable
+# ---------------------------------------------------------------------------
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/data
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>/data
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/assets
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
+    COMMENT "Copying data/ and assets/ next to the built executable"
+)

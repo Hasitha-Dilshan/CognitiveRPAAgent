@@ -1,0 +1,104 @@
+[
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++  -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/imgui.dir/third_party/imgui/imgui.cpp.o -c /workspaces/CognitiveRPAAgent/third_party/imgui/imgui.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/third_party/imgui/imgui.cpp",
+  "output": "CMakeFiles/imgui.dir/third_party/imgui/imgui.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++  -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/imgui.dir/third_party/imgui/imgui_draw.cpp.o -c /workspaces/CognitiveRPAAgent/third_party/imgui/imgui_draw.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/third_party/imgui/imgui_draw.cpp",
+  "output": "CMakeFiles/imgui.dir/third_party/imgui/imgui_draw.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++  -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/imgui.dir/third_party/imgui/imgui_tables.cpp.o -c /workspaces/CognitiveRPAAgent/third_party/imgui/imgui_tables.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/third_party/imgui/imgui_tables.cpp",
+  "output": "CMakeFiles/imgui.dir/third_party/imgui/imgui_tables.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++  -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/imgui.dir/third_party/imgui/imgui_widgets.cpp.o -c /workspaces/CognitiveRPAAgent/third_party/imgui/imgui_widgets.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/third_party/imgui/imgui_widgets.cpp",
+  "output": "CMakeFiles/imgui.dir/third_party/imgui/imgui_widgets.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++  -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/imgui.dir/third_party/imgui/imgui_demo.cpp.o -c /workspaces/CognitiveRPAAgent/third_party/imgui/imgui_demo.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/third_party/imgui/imgui_demo.cpp",
+  "output": "CMakeFiles/imgui.dir/third_party/imgui/imgui_demo.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++  -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/imgui.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o -c /workspaces/CognitiveRPAAgent/third_party/imgui/backends/imgui_impl_glfw.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/third_party/imgui/backends/imgui_impl_glfw.cpp",
+  "output": "CMakeFiles/imgui.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++  -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/imgui.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o -c /workspaces/CognitiveRPAAgent/third_party/imgui/backends/imgui_impl_opengl3.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/third_party/imgui/backends/imgui_impl_opengl3.cpp",
+  "output": "CMakeFiles/imgui.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++ -DPLATFORM_LINUX -I/workspaces/CognitiveRPAAgent/include -I/workspaces/CognitiveRPAAgent/include/core -I/workspaces/CognitiveRPAAgent/include/perception -I/workspaces/CognitiveRPAAgent/include/memory -I/workspaces/CognitiveRPAAgent/include/action -I/workspaces/CognitiveRPAAgent/include/platform -I/usr/include/leptonica -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -I/workspaces/CognitiveRPAAgent/third_party/json/include -isystem /usr/include/opencv4 -O3 -DNDEBUG -std=gnu++20 -Wall -Wextra -O3 -o CMakeFiles/CognitiveRPAAgent.dir/src/main.cpp.o -c /workspaces/CognitiveRPAAgent/src/main.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/src/main.cpp",
+  "output": "CMakeFiles/CognitiveRPAAgent.dir/src/main.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++ -DPLATFORM_LINUX -I/workspaces/CognitiveRPAAgent/include -I/workspaces/CognitiveRPAAgent/include/core -I/workspaces/CognitiveRPAAgent/include/perception -I/workspaces/CognitiveRPAAgent/include/memory -I/workspaces/CognitiveRPAAgent/include/action -I/workspaces/CognitiveRPAAgent/include/platform -I/usr/include/leptonica -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -I/workspaces/CognitiveRPAAgent/third_party/json/include -isystem /usr/include/opencv4 -O3 -DNDEBUG -std=gnu++20 -Wall -Wextra -O3 -o CMakeFiles/CognitiveRPAAgent.dir/src/action/InputController.cpp.o -c /workspaces/CognitiveRPAAgent/src/action/InputController.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/src/action/InputController.cpp",
+  "output": "CMakeFiles/CognitiveRPAAgent.dir/src/action/InputController.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++ -DPLATFORM_LINUX -I/workspaces/CognitiveRPAAgent/include -I/workspaces/CognitiveRPAAgent/include/core -I/workspaces/CognitiveRPAAgent/include/perception -I/workspaces/CognitiveRPAAgent/include/memory -I/workspaces/CognitiveRPAAgent/include/action -I/workspaces/CognitiveRPAAgent/include/platform -I/usr/include/leptonica -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -I/workspaces/CognitiveRPAAgent/third_party/json/include -isystem /usr/include/opencv4 -O3 -DNDEBUG -std=gnu++20 -Wall -Wextra -O3 -o CMakeFiles/CognitiveRPAAgent.dir/src/core/CoreEngine.cpp.o -c /workspaces/CognitiveRPAAgent/src/core/CoreEngine.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/src/core/CoreEngine.cpp",
+  "output": "CMakeFiles/CognitiveRPAAgent.dir/src/core/CoreEngine.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++ -DPLATFORM_LINUX -I/workspaces/CognitiveRPAAgent/include -I/workspaces/CognitiveRPAAgent/include/core -I/workspaces/CognitiveRPAAgent/include/perception -I/workspaces/CognitiveRPAAgent/include/memory -I/workspaces/CognitiveRPAAgent/include/action -I/workspaces/CognitiveRPAAgent/include/platform -I/usr/include/leptonica -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -I/workspaces/CognitiveRPAAgent/third_party/json/include -isystem /usr/include/opencv4 -O3 -DNDEBUG -std=gnu++20 -Wall -Wextra -O3 -o CMakeFiles/CognitiveRPAAgent.dir/src/core/SecurityLayer.cpp.o -c /workspaces/CognitiveRPAAgent/src/core/SecurityLayer.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/src/core/SecurityLayer.cpp",
+  "output": "CMakeFiles/CognitiveRPAAgent.dir/src/core/SecurityLayer.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++ -DPLATFORM_LINUX -I/workspaces/CognitiveRPAAgent/include -I/workspaces/CognitiveRPAAgent/include/core -I/workspaces/CognitiveRPAAgent/include/perception -I/workspaces/CognitiveRPAAgent/include/memory -I/workspaces/CognitiveRPAAgent/include/action -I/workspaces/CognitiveRPAAgent/include/platform -I/usr/include/leptonica -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -I/workspaces/CognitiveRPAAgent/third_party/json/include -isystem /usr/include/opencv4 -O3 -DNDEBUG -std=gnu++20 -Wall -Wextra -O3 -o CMakeFiles/CognitiveRPAAgent.dir/src/core/StateMachine.cpp.o -c /workspaces/CognitiveRPAAgent/src/core/StateMachine.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/src/core/StateMachine.cpp",
+  "output": "CMakeFiles/CognitiveRPAAgent.dir/src/core/StateMachine.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++ -DPLATFORM_LINUX -I/workspaces/CognitiveRPAAgent/include -I/workspaces/CognitiveRPAAgent/include/core -I/workspaces/CognitiveRPAAgent/include/perception -I/workspaces/CognitiveRPAAgent/include/memory -I/workspaces/CognitiveRPAAgent/include/action -I/workspaces/CognitiveRPAAgent/include/platform -I/usr/include/leptonica -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -I/workspaces/CognitiveRPAAgent/third_party/json/include -isystem /usr/include/opencv4 -O3 -DNDEBUG -std=gnu++20 -Wall -Wextra -O3 -o CMakeFiles/CognitiveRPAAgent.dir/src/memory/KnowledgeBase.cpp.o -c /workspaces/CognitiveRPAAgent/src/memory/KnowledgeBase.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/src/memory/KnowledgeBase.cpp",
+  "output": "CMakeFiles/CognitiveRPAAgent.dir/src/memory/KnowledgeBase.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++ -DPLATFORM_LINUX -I/workspaces/CognitiveRPAAgent/include -I/workspaces/CognitiveRPAAgent/include/core -I/workspaces/CognitiveRPAAgent/include/perception -I/workspaces/CognitiveRPAAgent/include/memory -I/workspaces/CognitiveRPAAgent/include/action -I/workspaces/CognitiveRPAAgent/include/platform -I/usr/include/leptonica -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -I/workspaces/CognitiveRPAAgent/third_party/json/include -isystem /usr/include/opencv4 -O3 -DNDEBUG -std=gnu++20 -Wall -Wextra -O3 -o CMakeFiles/CognitiveRPAAgent.dir/src/perception/OCRProcessor.cpp.o -c /workspaces/CognitiveRPAAgent/src/perception/OCRProcessor.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/src/perception/OCRProcessor.cpp",
+  "output": "CMakeFiles/CognitiveRPAAgent.dir/src/perception/OCRProcessor.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++ -DPLATFORM_LINUX -I/workspaces/CognitiveRPAAgent/include -I/workspaces/CognitiveRPAAgent/include/core -I/workspaces/CognitiveRPAAgent/include/perception -I/workspaces/CognitiveRPAAgent/include/memory -I/workspaces/CognitiveRPAAgent/include/action -I/workspaces/CognitiveRPAAgent/include/platform -I/usr/include/leptonica -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -I/workspaces/CognitiveRPAAgent/third_party/json/include -isystem /usr/include/opencv4 -O3 -DNDEBUG -std=gnu++20 -Wall -Wextra -O3 -o CMakeFiles/CognitiveRPAAgent.dir/src/perception/ScreenCapture.cpp.o -c /workspaces/CognitiveRPAAgent/src/perception/ScreenCapture.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/src/perception/ScreenCapture.cpp",
+  "output": "CMakeFiles/CognitiveRPAAgent.dir/src/perception/ScreenCapture.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++ -DPLATFORM_LINUX -I/workspaces/CognitiveRPAAgent/include -I/workspaces/CognitiveRPAAgent/include/core -I/workspaces/CognitiveRPAAgent/include/perception -I/workspaces/CognitiveRPAAgent/include/memory -I/workspaces/CognitiveRPAAgent/include/action -I/workspaces/CognitiveRPAAgent/include/platform -I/usr/include/leptonica -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -I/workspaces/CognitiveRPAAgent/third_party/json/include -isystem /usr/include/opencv4 -O3 -DNDEBUG -std=gnu++20 -Wall -Wextra -O3 -o CMakeFiles/CognitiveRPAAgent.dir/src/perception/VisionProcessor.cpp.o -c /workspaces/CognitiveRPAAgent/src/perception/VisionProcessor.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/src/perception/VisionProcessor.cpp",
+  "output": "CMakeFiles/CognitiveRPAAgent.dir/src/perception/VisionProcessor.cpp.o"
+},
+{
+  "directory": "/workspaces/CognitiveRPAAgent/build",
+  "command": "/usr/bin/c++ -DPLATFORM_LINUX -I/workspaces/CognitiveRPAAgent/include -I/workspaces/CognitiveRPAAgent/include/core -I/workspaces/CognitiveRPAAgent/include/perception -I/workspaces/CognitiveRPAAgent/include/memory -I/workspaces/CognitiveRPAAgent/include/action -I/workspaces/CognitiveRPAAgent/include/platform -I/usr/include/leptonica -I/workspaces/CognitiveRPAAgent/third_party/imgui -I/workspaces/CognitiveRPAAgent/third_party/imgui/backends -I/workspaces/CognitiveRPAAgent/third_party/json/include -isystem /usr/include/opencv4 -O3 -DNDEBUG -std=gnu++20 -Wall -Wextra -O3 -o CMakeFiles/CognitiveRPAAgent.dir/src/platform/LinuxPlatform.cpp.o -c /workspaces/CognitiveRPAAgent/src/platform/LinuxPlatform.cpp",
+  "file": "/workspaces/CognitiveRPAAgent/src/platform/LinuxPlatform.cpp",
+  "output": "CMakeFiles/CognitiveRPAAgent.dir/src/platform/LinuxPlatform.cpp.o"
+}
+]

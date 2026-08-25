@@ -1,0 +1,45 @@
+name: Build Windows EXE
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch: # මෙය මඟින් ඔබට අවශ්‍ය වෙලාවට බොත්තමක් ඔබා Build එක Start කළ හැක
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: Setup MSYS2 and Dependencies
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: UCRT64
+        update: true
+        install: >-
+          mingw-w64-ucrt-x86_64-gcc
+          mingw-w64-ucrt-x86_64-cmake
+          mingw-w64-ucrt-x86_64-ninja
+          mingw-w64-ucrt-x86_64-pkgconf
+          mingw-w64-ucrt-x86_64-opencv
+          mingw-w64-ucrt-x86_64-tesseract-ocr
+          mingw-w64-ucrt-x86_64-glfw
+    
+    - name: Build with CMake
+      run: |
+        cmake -B build -G Ninja
+        cmake --build build
+    
+    - name: Upload Windows EXE Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: CognitiveRPAAgent-Windows
+        path: |
+          build/CognitiveRPAAgent.exe
+          data/
+          assets/

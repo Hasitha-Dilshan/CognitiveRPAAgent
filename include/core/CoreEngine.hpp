@@ -36,52 +36,38 @@ struct LocateResult {
 };
 
 /// CoreEngine ties together perception, decision-making, memory and action.
-/// It owns the main execution loop and is the only class that mutates
-/// agent-wide state. All subsystems are injected via unique_ptr for
-/// testability and clean lifetime management (RAII, no raw owning pointers).
 class CoreEngine {
 public:
     explicit CoreEngine(std::unique_ptr<platform::IPlatform> platform);
     ~CoreEngine();
 
-    // Non-copyable: this class owns unique hardware/OS resources.
     CoreEngine(const CoreEngine&) = delete;
     CoreEngine& operator=(const CoreEngine&) = delete;
 
-    /// Loads base_skills.json and memory.json from disk into the knowledge base.
-    bool initialize(const std::string& baseSkillsPath,
-                     const std::string& memoryPath);
-
-    /// Attempts to locate and click a named skill target on screen.
-    /// Applies fallback chain: template match -> feature match -> OCR.
-    /// Returns true if the action was executed successfully.
+    bool initialize(const std::string& baseSkillsPath, const std::string& memoryPath);
     bool executeSkill(const std::string& skillName);
-
-    /// Blocks (without fixed sleep) until a described visual state is reached,
-    /// or until the adaptive timeout elapses. Returns false on timeout.
-    bool waitForState(const std::string& stateDescription,
-                       int maxTimeoutMs = 30000);
-
-    /// Starts the engine's background monitoring thread (safety watchdog).
+    bool waitForState(const std::string& stateDescription, int maxTimeoutMs = 30000);
     void start();
-
-    /// Signals all loops to stop and joins the worker thread.
     void stop();
-
-    /// True if the security layer has triggered an emergency halt.
     bool isHalted() const noexcept { return halted_.load(); }
 
+    // --- UI/Main.cpp සඳහා අලුතින් එක් කළ කොටස් ---
+    bool isRunning() const noexcept { return running_.load(std::memory_order_acquire); }
+    
+    void resetSecurityState() {
+        securityLayer_->reset();
+        halted_.store(false, std::memory_order_release);
+    }
+    
+    const std::string& lastInitError() const noexcept { return lastInitError_; }
+    const std::string& lastExecutionError() const noexcept { return lastExecutionError_; }
+
 private:
-    /// Core fallback pipeline: template -> ORB feature match -> OCR text search.
     LocateResult locateTarget(const SkillTarget& target);
-
-    /// Persists newly learned target features back to memory.json.
     void learnFromSuccess(SkillTarget& target, const LocateResult& result);
-
-    /// Background thread body: watches for kill-switch conditions.
     void monitorLoop();
 
-    std::unique_ptr<platform::IPlatform>      platform_;
+    std::unique_ptr<platform::IPlatform>       platform_;
     std::unique_ptr<perception::ScreenCapture> screenCapture_;
     std::unique_ptr<perception::VisionProcessor> visionProcessor_;
     std::unique_ptr<perception::OCRProcessor>  ocrProcessor_;
@@ -93,6 +79,13 @@ private:
     std::thread monitorThread_;
     std::atomic<bool> running_{false};
     std::atomic<bool> halted_{false};
+
+    // --- UI/Main.cpp සඳහා අලුතින් එක් කළ විචල්‍යයන් ---
+    std::string lastInitError_;
+    std::string lastExecutionError_;
+    std::string memoryPath_;
+    std::string tessdataPath_ = "data/tessdata"; 
+    std::string ocrLanguage_ = "eng";
 };
 
 } // namespace rpa::core

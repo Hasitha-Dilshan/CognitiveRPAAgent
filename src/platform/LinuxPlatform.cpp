@@ -8,6 +8,7 @@
 #include <cstring>
 #include <algorithm>
 #include <cctype>
+#include <opencv2/imgproc.hpp>
 
 namespace rpa::platform {
 
