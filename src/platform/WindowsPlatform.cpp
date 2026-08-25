@@ -2,6 +2,7 @@
 
 #include "platform/WindowsPlatform.hpp"
 #include "action/InputController.hpp" // for KeyCode / MouseButton enum values
+#include <opencv2/imgproc.hpp>
 #include <stdexcept>
 #include <vector>
 #include <algorithm>

@@ -15,7 +15,7 @@ endif()
 # ---------------------------------------------------------------------------
 # Dependencies
 # ---------------------------------------------------------------------------
-find_package(OpenCV REQUIRED)
+find_package(OpenCV REQUIRED COMPONENTS core highgui imgproc calib3d features2d)
 
 # Use pkg-config for Tesseract and Leptonica
 find_package(PkgConfig REQUIRED)
@@ -27,26 +27,44 @@ find_package(OpenGL REQUIRED)
 find_package(Threads REQUIRED)
 
 # ---------------------------------------------------------------------------
-# Dear ImGui (compiled as a static lib)
+# FetchContent for Dependencies
 # ---------------------------------------------------------------------------
-set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/third_party/imgui)
+include(FetchContent)
 
-add_library(imgui STATIC
-    ${IMGUI_DIR}/imgui.cpp
-    ${IMGUI_DIR}/imgui_draw.cpp
-    ${IMGUI_DIR}/imgui_tables.cpp
-    ${IMGUI_DIR}/imgui_widgets.cpp
-    ${IMGUI_DIR}/imgui_demo.cpp
-    ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp
-    ${IMGUI_DIR}/backends/imgui_impl_opengl3.cpp
+FetchContent_Declare(
+    json
+    GIT_REPOSITORY https://github.com/nlohmann/json.git
+    GIT_TAG v3.11.3
+    SYSTEM
 )
+FetchContent_MakeAvailable(json)
 
-target_include_directories(imgui PUBLIC
-    ${IMGUI_DIR}
-    ${IMGUI_DIR}/backends
+FetchContent_Declare(
+    imgui
+    GIT_REPOSITORY https://github.com/ocornut/imgui.git
+    GIT_TAG docking
 )
+FetchContent_GetProperties(imgui)
+if(NOT imgui_POPULATED)
+    FetchContent_Populate(imgui)
 
-target_link_libraries(imgui PUBLIC glfw OpenGL::GL)
+    add_library(imgui STATIC
+        ${imgui_SOURCE_DIR}/imgui.cpp
+        ${imgui_SOURCE_DIR}/imgui_draw.cpp
+        ${imgui_SOURCE_DIR}/imgui_tables.cpp
+        ${imgui_SOURCE_DIR}/imgui_widgets.cpp
+        ${imgui_SOURCE_DIR}/imgui_demo.cpp
+        ${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.cpp
+        ${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp
+    )
+
+    target_include_directories(imgui PUBLIC
+        ${imgui_SOURCE_DIR}
+        ${imgui_SOURCE_DIR}/backends
+    )
+
+    target_link_libraries(imgui PUBLIC glfw OpenGL::GL)
+endif()
 
 # ---------------------------------------------------------------------------
 # Core project sources
@@ -77,7 +95,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_SOURCE_DIR}/include/memory
     ${CMAKE_SOURCE_DIR}/include/action
     ${CMAKE_SOURCE_DIR}/include/platform
-    ${CMAKE_SOURCE_DIR}/third_party/json
     ${OpenCV_INCLUDE_DIRS}
     ${Tesseract_INCLUDE_DIRS}
     ${Leptonica_INCLUDE_DIRS}
@@ -85,7 +102,8 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     imgui
-    ${OpenCV_LIBS}
+    nlohmann_json::nlohmann_json
+    opencv_core opencv_highgui opencv_imgproc opencv_calib3d opencv_features2d
     ${Tesseract_LIBRARIES}
     ${Leptonica_LIBRARIES}
     Threads::Threads
