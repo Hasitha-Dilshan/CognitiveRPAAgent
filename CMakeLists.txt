@@ -13,14 +13,42 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 # ---------------------------------------------------------------------------
+# Fetch Dependencies (FetchContent)
+# ---------------------------------------------------------------------------
+include(FetchContent)
+
+FetchContent_Declare(
+    imgui
+    GIT_REPOSITORY https://github.com/ocornut/imgui.git
+    GIT_TAG v1.90.1
+)
+
+FetchContent_Declare(
+    nlohmann_json
+    GIT_REPOSITORY https://github.com/nlohmann/json.git
+    GIT_TAG v3.11.3
+)
+
+FetchContent_MakeAvailable(imgui nlohmann_json)
+
+# ---------------------------------------------------------------------------
 # Dependencies
 # ---------------------------------------------------------------------------
 find_package(OpenCV REQUIRED)
 
-# Use pkg-config for Tesseract and Leptonica
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(Tesseract REQUIRED tesseract)
-pkg_check_modules(Leptonica REQUIRED lept)
+# Use find_package in CONFIG mode for Tesseract/Leptonica on Windows,
+# otherwise fall back to PkgConfig.
+find_package(Tesseract QUIET)
+if (NOT Tesseract_FOUND)
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(Tesseract REQUIRED tesseract)
+endif()
+
+find_package(Leptonica QUIET)
+if (NOT Leptonica_FOUND)
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(Leptonica REQUIRED lept)
+endif()
 
 find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)
@@ -29,7 +57,7 @@ find_package(Threads REQUIRED)
 # ---------------------------------------------------------------------------
 # Dear ImGui (compiled as a static lib)
 # ---------------------------------------------------------------------------
-set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/third_party/imgui)
+set(IMGUI_DIR ${imgui_SOURCE_DIR})
 
 add_library(imgui STATIC
     ${IMGUI_DIR}/imgui.cpp
@@ -77,19 +105,35 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_SOURCE_DIR}/include/memory
     ${CMAKE_SOURCE_DIR}/include/action
     ${CMAKE_SOURCE_DIR}/include/platform
-    ${CMAKE_SOURCE_DIR}/third_party/json
     ${OpenCV_INCLUDE_DIRS}
-    ${Tesseract_INCLUDE_DIRS}
-    ${Leptonica_INCLUDE_DIRS}
 )
+
+if (Tesseract_FOUND AND NOT "${Tesseract_INCLUDE_DIRS}" STREQUAL "")
+    target_include_directories(${PROJECT_NAME} PRIVATE ${Tesseract_INCLUDE_DIRS})
+endif()
+
+if (Leptonica_FOUND AND NOT "${Leptonica_INCLUDE_DIRS}" STREQUAL "")
+    target_include_directories(${PROJECT_NAME} PRIVATE ${Leptonica_INCLUDE_DIRS})
+endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     imgui
+    nlohmann_json::nlohmann_json
     ${OpenCV_LIBS}
-    ${Tesseract_LIBRARIES}
-    ${Leptonica_LIBRARIES}
     Threads::Threads
 )
+
+if (TARGET Tesseract::tesseract)
+    target_link_libraries(${PROJECT_NAME} PRIVATE Tesseract::tesseract)
+elseif(Tesseract_LIBRARIES)
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${Tesseract_LIBRARIES})
+endif()
+
+if (TARGET Leptonica::leptonica)
+    target_link_libraries(${PROJECT_NAME} PRIVATE Leptonica::leptonica)
+elseif(Leptonica_LIBRARIES)
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${Leptonica_LIBRARIES})
+endif()
 
 # ---------------------------------------------------------------------------
 # OS-specific linking
@@ -124,12 +168,20 @@ endif()
 # ---------------------------------------------------------------------------
 # Post-build: copy runtime assets next to the executable
 # ---------------------------------------------------------------------------
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/data
-        $<TARGET_FILE_DIR:${PROJECT_NAME}>/data
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/assets
-        $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
-    COMMENT "Copying data/ and assets/ next to the built executable"
-)
+if (EXISTS ${CMAKE_SOURCE_DIR}/data)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/data
+            $<TARGET_FILE_DIR:${PROJECT_NAME}>/data
+        COMMENT "Copying data/ next to the built executable"
+    )
+endif()
+
+if (EXISTS ${CMAKE_SOURCE_DIR}/assets)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/assets
+            $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
+        COMMENT "Copying assets/ next to the built executable"
+    )
+endif()
